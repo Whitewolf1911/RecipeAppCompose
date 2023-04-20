@@ -37,10 +37,12 @@ class RecipeListViewModel @Inject constructor(
 
     fun onQueryChanged(query: String) {
         this.query.value = query
-        viewModelScope.launch {
-            searchJob?.cancel()
-            delay(SEARCH_QUERY_DELAY)
-            searchRecipe(query)
+        if (query.length >= 2) {
+            viewModelScope.launch {
+                searchJob?.cancel()
+                delay(SEARCH_QUERY_DELAY)
+                searchRecipe(query)
+            }
         }
     }
 
