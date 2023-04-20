@@ -19,7 +19,9 @@ fun getAllFoodCategories(): List<FoodCategory> {
 
 fun getFoodCategory(value: String): FoodCategory? {
     return try {
-        FoodCategory.valueOf(value)
+        FoodCategory.values().toList().find {
+            it.value == value
+        }
     } catch (e: Exception) {
         null
     }

@@ -109,11 +109,14 @@ fun SearchView(
             }
         }
         Spacer(modifier = Modifier.height(12.dp))
-        LazyRow() {
-            items(getAllFoodCategories()) {
+        LazyRow(
+            modifier = Modifier.padding(bottom = 8.dp)
+        ) {
+            items(getAllFoodCategories()) { foodCategory ->
                 FoodCategoryChip(
-                    category = it.value,
-                    onExecuteSearch = { onQueryChanged(it.value) })
+                    category = foodCategory.value,
+                    onExecuteSearch = { onQueryChanged(foodCategory.value) }
+                )
             }
         }
     }

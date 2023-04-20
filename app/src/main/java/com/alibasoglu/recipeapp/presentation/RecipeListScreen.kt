@@ -30,7 +30,8 @@ fun RecipeListScreen(
         }
         item {
             SearchView(
-                onQueryChanged = viewModel::onQueryChanged, queryValue = searchQuery.value
+                onQueryChanged = viewModel::onQueryChanged,
+                queryValue = searchQuery.value
             )
         }
         item { Spacer(modifier = Modifier.height(4.dp)) }
