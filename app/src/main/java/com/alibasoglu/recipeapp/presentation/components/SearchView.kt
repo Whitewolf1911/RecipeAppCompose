@@ -6,11 +6,15 @@ import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -33,6 +37,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import com.alibasoglu.recipeapp.presentation.getAllFoodCategories
 
 @Composable
 fun SearchView(
@@ -45,58 +50,71 @@ fun SearchView(
     var textFieldFriction by remember { mutableStateOf(1f) }
     val focusManager = LocalFocusManager.current
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(IntrinsicSize.Max),
-        Arrangement.SpaceEvenly
-    ) {
-        OutlinedTextField(
-            value = queryValue,
-            onValueChange = { newValue ->
-                onQueryChanged(newValue)
-            },
-            singleLine = true,
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Default.Search,
-                    contentDescription = null
-                )
-            },
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
-            label = { Text("Search recipe...") },
-            modifier = Modifier
-                .fillMaxWidth(textFieldFriction)
-                .padding(8.dp)
-                .focusRequester(focusRequester)
-                .onFocusChanged { focusState ->
-                    shouldShowCancelButton = focusState.isFocused
-                    textFieldFriction = if (shouldShowCancelButton) {
-                        0.8f
-                    } else {
-                        1f
-                    }
-                }
-                .animateContentSize(
-                    animationSpec = TweenSpec(durationMillis = 100, easing =  LinearOutSlowInEasing)
-                ),
-            shape = RoundedCornerShape(20.dp)
-        )
-        AnimatedVisibility(
-            visible = shouldShowCancelButton,
-            modifier = Modifier.align(Alignment.CenterVertically)
+    Column() {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Max),
+            Arrangement.SpaceEvenly
         ) {
-            Text(
-                "Cancel",
-                color = MaterialTheme.colorScheme.error,
+            OutlinedTextField(
+                value = queryValue,
+                onValueChange = { newValue ->
+                    onQueryChanged(newValue)
+                },
+                singleLine = true,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = null
+                    )
+                },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
+                label = { Text("Search recipe...") },
                 modifier = Modifier
-                    .clickable {
-                        onQueryChanged("")
-                        shouldShowCancelButton = false
-                        focusManager.clearFocus()
+                    .fillMaxWidth(textFieldFriction)
+                    .padding(8.dp)
+                    .focusRequester(focusRequester)
+                    .onFocusChanged { focusState ->
+                        shouldShowCancelButton = focusState.isFocused
+                        textFieldFriction = if (shouldShowCancelButton) {
+                            0.8f
+                        } else {
+                            1f
+                        }
                     }
+                    .animateContentSize(
+                        animationSpec = TweenSpec(
+                            durationMillis = 100,
+                            easing = LinearOutSlowInEasing
+                        )
+                    ),
+                shape = RoundedCornerShape(20.dp)
             )
+            AnimatedVisibility(
+                visible = shouldShowCancelButton,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            ) {
+                Text(
+                    "Cancel",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier
+                        .clickable {
+                            onQueryChanged("")
+                            shouldShowCancelButton = false
+                            focusManager.clearFocus()
+                        }
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        LazyRow() {
+            items(getAllFoodCategories()) {
+                FoodCategoryChip(
+                    category = it.value,
+                    onExecuteSearch = { onQueryChanged(it.value) })
+            }
         }
     }
 }

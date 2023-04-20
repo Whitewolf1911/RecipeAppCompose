@@ -16,7 +16,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,7 +41,7 @@ fun RecipeCard(
             .clickable(onClick = onClick)
     ) {
         Column(
-            modifier = Modifier.background(color = Color.LightGray)
+            modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
         ) {
             recipe.featuredImage?.let { url ->
                 Image(
@@ -72,7 +71,7 @@ fun RecipeCard(
                         modifier = Modifier
                             .wrapContentWidth(Alignment.End)
                             .align(Alignment.CenterVertically),
-                        style = MaterialTheme.typography.headlineSmall
+                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
