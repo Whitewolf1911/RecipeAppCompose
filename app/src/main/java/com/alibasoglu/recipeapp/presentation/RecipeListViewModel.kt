@@ -22,24 +22,26 @@ class RecipeListViewModel @Inject constructor(
 
     val query = mutableStateOf("")
 
-    private val searchJob: Job? = null
+    private var searchJob: Job? = null
 
     init {
         searchRecipe("")
     }
 
     private fun searchRecipe(query: String) {
+        state = state.copy(isLoading = true)
         viewModelScope.launch {
+            delay(3000L)
             val result = recipeRepository.searchRecipe(token = TOKEN, page = 1, query = query)
-            state = state.copy(list = result)
+            state = state.copy(list = result, isLoading = false)
         }
     }
 
     fun onQueryChanged(query: String) {
+        searchJob?.cancel()
         this.query.value = query
         if (query.length >= 2) {
-            viewModelScope.launch {
-                searchJob?.cancel()
+            searchJob = viewModelScope.launch {
                 delay(SEARCH_QUERY_DELAY)
                 searchRecipe(query)
             }

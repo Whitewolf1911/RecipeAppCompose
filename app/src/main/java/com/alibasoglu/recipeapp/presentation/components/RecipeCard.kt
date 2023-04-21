@@ -1,5 +1,6 @@
 package com.alibasoglu.recipeapp.presentation.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,7 +42,7 @@ fun RecipeCard(
             .clickable(onClick = onClick)
     ) {
         Column(
-            modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
+            modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)
         ) {
             recipe.featuredImage?.let { url ->
                 Image(
@@ -61,6 +62,7 @@ fun RecipeCard(
                 ) {
                     Text(
                         text = title,
+                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start),
@@ -80,7 +82,7 @@ fun RecipeCard(
 }
 
 
-@Preview
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewRecipeCard() {
     RecipeCard(
