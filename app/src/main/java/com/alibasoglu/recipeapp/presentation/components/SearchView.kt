@@ -2,8 +2,7 @@ package com.alibasoglu.recipeapp.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.TweenSpec
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -85,10 +84,7 @@ fun SearchView(
                         }
                     }
                     .animateContentSize(
-                        animationSpec = TweenSpec(
-                            durationMillis = 100,
-                            easing = LinearOutSlowInEasing
-                        )
+                        animationSpec = tween(50)
                     ),
                 shape = RoundedCornerShape(20.dp)
             )

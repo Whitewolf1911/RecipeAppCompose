@@ -3,6 +3,7 @@ package com.alibasoglu.recipeapp.presentation.components
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
@@ -13,29 +14,35 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
 @Composable
 fun LikeButton() {
-    val animationDuration = 400
+    val animationDuration = 200
     val isFavorite = remember { mutableStateOf(false) }
+    val size = remember { androidx.compose.animation.core.Animatable(0.8f) }
     val color = remember { Animatable(Color.White) }
     val scope = rememberCoroutineScope()
     Icon(
         tint = color.value,
         imageVector = Icons.Default.Favorite,
         contentDescription = null,
-        modifier = Modifier.clickable(onClick = {
-            scope.launch {
-                if (isFavorite.value) {
-                    color.animateTo(Color.White, animationSpec = tween(animationDuration))
-                    isFavorite.value = false
-                } else {
-                    color.animateTo(Color.Red, animationSpec = tween(animationDuration))
-                    isFavorite.value = true
+        modifier = Modifier
+            .clickable(onClick = {
+                scope.launch {
+                    if (isFavorite.value) {
+                        color.animateTo(Color.White, animationSpec = tween(animationDuration))
+                        size.animateTo(0.8f, animationSpec = tween(animationDuration))
+                        isFavorite.value = false
+                    } else {
+                        size.animateTo(1f, animationSpec = tween(animationDuration))
+                        color.animateTo(Color.Red, animationSpec = tween(animationDuration))
+                        isFavorite.value = true
+                    }
                 }
-            }
-        })
+            })
+            .size(size.value.dp * 200)
     )
 }
 
