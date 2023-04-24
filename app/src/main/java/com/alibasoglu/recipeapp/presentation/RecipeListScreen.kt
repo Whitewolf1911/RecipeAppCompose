@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alibasoglu.recipeapp.presentation.components.CircularProgressBarWithText
+import com.alibasoglu.recipeapp.presentation.components.LikeButton
 import com.alibasoglu.recipeapp.presentation.components.RecipeCard
 import com.alibasoglu.recipeapp.presentation.components.SearchView
 
@@ -30,6 +31,9 @@ fun RecipeListScreen(
                 .padding(horizontal = 12.dp)
                 .fillMaxSize()
         ) {
+            item {
+                LikeButton()
+            }
             item {
                 TopAppBar(
                     title = { Text("Recipe App") }

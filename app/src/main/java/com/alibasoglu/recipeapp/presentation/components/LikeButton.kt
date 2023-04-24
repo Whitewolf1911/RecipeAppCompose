@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun LikeButton() {
-    val animationDuration = 200
+    val animationDuration = 600
     val isFavorite = remember { mutableStateOf(false) }
     val size = remember { androidx.compose.animation.core.Animatable(0.8f) }
     val color = remember { Animatable(Color.White) }
@@ -32,12 +32,20 @@ fun LikeButton() {
             .clickable(onClick = {
                 scope.launch {
                     if (isFavorite.value) {
-                        color.animateTo(Color.White, animationSpec = tween(animationDuration))
-                        size.animateTo(0.8f, animationSpec = tween(animationDuration))
+                        launch() {
+                            color.animateTo(Color.White, animationSpec = tween(animationDuration))
+                        }
+                        launch() {
+                            size.animateTo(0.8f, animationSpec = tween(animationDuration))
+                        }
                         isFavorite.value = false
                     } else {
-                        size.animateTo(1f, animationSpec = tween(animationDuration))
-                        color.animateTo(Color.Red, animationSpec = tween(animationDuration))
+                        launch() {
+                            size.animateTo(1f, animationSpec = tween(animationDuration))
+                        }
+                        launch {
+                            color.animateTo(Color.Red, animationSpec = tween(animationDuration))
+                        }
                         isFavorite.value = true
                     }
                 }

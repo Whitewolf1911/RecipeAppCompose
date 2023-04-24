@@ -42,7 +42,6 @@ fun PulsingDemo() {
 
 @Composable
 fun ResizingAnimatingBox() {
-
     Box(
         modifier = Modifier
             .height(200.dp)
