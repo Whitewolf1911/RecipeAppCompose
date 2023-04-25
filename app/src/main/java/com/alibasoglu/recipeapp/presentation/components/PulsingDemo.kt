@@ -11,12 +11,17 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -65,6 +70,35 @@ fun getAnimationMagnitude(initial: Dp, final: Dp): Dp {
     return width
 }
 
+@Composable
+fun GradientDemo() {
+    val colors = listOf(
+        Color.Blue,
+        Color.Red,
+        Color.Blue
+    )
+    val brush = linearGradient(
+        colors = colors,
+        start = Offset(0f, 0f),
+        end = Offset(600f, 900f)
+    )
+    Surface(
+        shape = MaterialTheme.shapes.small
+    ) {
+        Spacer(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(brush)
+        )
+    }
+}
+
+
+@Preview
+@Composable
+fun PreviewGradientDemo() {
+    GradientDemo()
+}
 
 @Preview
 @Composable
