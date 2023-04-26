@@ -29,7 +29,7 @@ fun RecipeCard(
     onClick: () -> Unit
 ) {
     Card(
-        shape = MaterialTheme.shapes.small,
+        shape = MaterialTheme.shapes.large,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp
         ),

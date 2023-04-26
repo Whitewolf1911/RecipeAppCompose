@@ -20,7 +20,7 @@ fun FoodCategoryChip(
     Surface(
         modifier = Modifier.padding(horizontal = 4.dp),
         shadowElevation = 8.dp,
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.large,
         color = MaterialTheme.colorScheme.primary
     ) {
         Row(
