@@ -1,5 +1,6 @@
 package com.alibasoglu.recipeapp.di
 
+import com.alibasoglu.recipeapp.Application
 import com.alibasoglu.recipeapp.data.RecipeRepositoryImpl
 import com.alibasoglu.recipeapp.data.remote.RecipeService
 import com.alibasoglu.recipeapp.domain.repository.RecipeRepository
@@ -14,6 +15,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideApplication(): Application {
+        return Application()
+    }
 
     @Provides
     @Singleton

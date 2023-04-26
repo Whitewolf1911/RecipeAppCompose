@@ -14,11 +14,16 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import kotlinx.coroutines.launch
 
 @Composable
-fun LikeButton() {
+fun LikeButton(
+    modifier: Modifier = Modifier,
+    sizeInDp: Dp
+) {
     val animationDuration = 600
     val isFavorite = remember { mutableStateOf(false) }
     val size = remember { androidx.compose.animation.core.Animatable(0.8f) }
@@ -28,7 +33,7 @@ fun LikeButton() {
         tint = color.value,
         imageVector = Icons.Default.Favorite,
         contentDescription = null,
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = {
                 scope.launch {
                     if (isFavorite.value) {
@@ -50,12 +55,12 @@ fun LikeButton() {
                     }
                 }
             })
-            .size(size.value.dp * 200)
+            .size(size.value * sizeInDp)
     )
 }
 
 @Preview
 @Composable
 fun PreviewLikeButton() {
-    LikeButton()
+    LikeButton(sizeInDp = 80.dp)
 }

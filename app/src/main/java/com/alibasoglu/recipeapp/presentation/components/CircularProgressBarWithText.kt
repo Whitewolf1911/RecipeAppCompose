@@ -31,7 +31,7 @@ fun CircularProgressBarWithText() {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun PreviewCircularProgressBarWithText() {
     CircularProgressBarWithText()

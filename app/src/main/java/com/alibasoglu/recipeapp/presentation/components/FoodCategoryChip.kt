@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alibasoglu.recipeapp.ui.theme.localFont
 
 @Composable
 fun FoodCategoryChip(
@@ -32,7 +33,7 @@ fun FoodCategoryChip(
         ) {
             Text(
                 text = category,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.localFont.semiBoldBody,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
             )
         }

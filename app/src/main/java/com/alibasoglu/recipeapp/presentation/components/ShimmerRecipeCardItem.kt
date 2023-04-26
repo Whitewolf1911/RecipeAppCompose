@@ -38,7 +38,7 @@ fun ShimmerRecipeCardItem(
             getShimmerAnimationMagnitude(finalTargetValue = cardHeight)
         )
     )
-    Surface() {
+    Surface(color = MaterialTheme.colorScheme.background) {
         Spacer(
             modifier = modifier
                 .width(cardWidth)

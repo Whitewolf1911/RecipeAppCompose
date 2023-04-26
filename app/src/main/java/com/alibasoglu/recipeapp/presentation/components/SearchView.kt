@@ -2,11 +2,13 @@ package com.alibasoglu.recipeapp.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.clipScrollableContainer
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,6 +39,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.alibasoglu.recipeapp.presentation.getAllFoodCategories
+import com.alibasoglu.recipeapp.ui.theme.localFont
 
 @Composable
 fun SearchView(
@@ -52,11 +55,12 @@ fun SearchView(
     Column() {
         Row(
             modifier = modifier
-                .fillMaxWidth()
-                .height(IntrinsicSize.Max),
+                .fillMaxWidth(1f)
+                .height(84.dp),
             Arrangement.SpaceEvenly
         ) {
             OutlinedTextField(
+                textStyle = MaterialTheme.localFont.regularH4,
                 value = queryValue,
                 onValueChange = { newValue ->
                     onQueryChanged(newValue)
@@ -73,6 +77,7 @@ fun SearchView(
                 label = { Text("Search recipe...") },
                 modifier = Modifier
                     .fillMaxWidth(textFieldFriction)
+                    .clipScrollableContainer(orientation = Orientation.Horizontal)
                     .padding(8.dp)
                     .focusRequester(focusRequester)
                     .onFocusChanged { focusState ->
@@ -84,7 +89,7 @@ fun SearchView(
                         }
                     }
                     .animateContentSize(
-                        animationSpec = tween(50)
+                        animationSpec = tween(50, easing = LinearEasing)
                     ),
                 shape = RoundedCornerShape(20.dp)
             )

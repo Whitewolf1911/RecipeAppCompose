@@ -31,7 +31,7 @@ class RecipeListViewModel @Inject constructor(
     private fun searchRecipe(query: String) {
         state = state.copy(isLoading = true)
         viewModelScope.launch {
-            delay(5000L)
+            delay(3000L)
             val result = recipeRepository.searchRecipe(token = TOKEN, page = 1, query = query)
             state = state.copy(list = result, isLoading = false)
         }

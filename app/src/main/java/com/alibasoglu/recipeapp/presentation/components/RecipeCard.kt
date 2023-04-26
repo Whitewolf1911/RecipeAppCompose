@@ -1,6 +1,5 @@
 package com.alibasoglu.recipeapp.presentation.components
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.alibasoglu.recipeapp.domain.model.Recipe
+import com.alibasoglu.recipeapp.ui.theme.localFont
 
 @Composable
 fun RecipeCard(
@@ -61,18 +61,17 @@ fun RecipeCard(
                 ) {
                     Text(
                         text = title,
-                        color = MaterialTheme.colorScheme.onPrimary,
                         modifier = Modifier
                             .fillMaxWidth(0.85f)
                             .wrapContentWidth(Alignment.Start),
-                        style = MaterialTheme.typography.headlineSmall
+                        style = MaterialTheme.localFont.mediumH3
                     )
                     Text(
                         text = recipe.rating.toString(),
                         modifier = Modifier
                             .wrapContentWidth(Alignment.End)
                             .align(Alignment.CenterVertically),
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.localFont.mediumH3
                     )
                 }
             }
@@ -81,7 +80,7 @@ fun RecipeCard(
 }
 
 
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview()
 @Composable
 fun PreviewRecipeCard() {
     RecipeCard(
