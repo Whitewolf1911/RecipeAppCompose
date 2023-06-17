@@ -29,6 +29,8 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
+                    // calisma 1
+                    // calisma 2
                 ) {
                     RecipeListScreen()
                 }
